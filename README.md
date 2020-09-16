@@ -538,16 +538,16 @@ STATUS OK
   - [x] Add findByName to the User Service with associated repository entry
   - [x] Add the necessary helper functions
   - [x] Add the SecurityUserService service
-  - [ ] Add and update the necessary configuration files
-- [ ] The initial endpoints are affected by security as follows
-  - [ ] http://localhost:2019/users/users
-    - [ ] Only users with role Admin can access this endpoint
-  - [ ] http://localhost:2019/users/user/1
-    - [ ] Only users with role Admin can access this endpoint
-  - [ ] POST http://localhost:2019/users/user
-    - [ ] Only users with role Admin can access this endpoint
-  - [ ] DELETE http://localhost:2019/users/user/1
-    - [ ] Only users with role Admin can access this endpoint
+  - [x] Add and update the necessary configuration files
+- [x] The initial endpoints are affected by security as follows
+  - [x] http://localhost:2019/users/users
+    - [x] Only users with role Admin can access this endpoint
+  - [x] http://localhost:2019/users/user/1
+    - [x] Only users with role Admin can access this endpoint
+  - [x] POST http://localhost:2019/users/user
+    - [x] Only users with role Admin can access this endpoint
+  - [x] DELETE http://localhost:2019/users/user/1
+    - [x] Only users with role Admin can access this endpoint
   - [ ] http://localhost:2019/carts/user
     - [ ] Drop the path variable and return the information for authenticated user
   - [ ] http://localhost:2019/carts/cart/1
