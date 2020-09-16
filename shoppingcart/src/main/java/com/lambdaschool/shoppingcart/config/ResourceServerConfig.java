@@ -14,7 +14,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
     private static final String RESOURCE_ID = "resource_id";
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources)
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception
     {
         resources.resourceId(RESOURCE_ID).stateless(false);
     }

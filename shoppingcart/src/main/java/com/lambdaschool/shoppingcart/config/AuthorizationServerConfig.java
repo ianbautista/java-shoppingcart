@@ -6,13 +6,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
-@EnableResourceServer
-public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapter
+@EnableAuthorizationServer
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter
 {
     static final String CLIENT_ID = System.getenv("OAUTHCLIENTID");
     static final String CLIENT_SECRET = System.getenv("OAUTHCLIENTSECRET");
@@ -23,14 +24,17 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
     static final String TRUST = "trust";
     static final int ACCESS_TOKEN_VALIDITY_SECONDS = -1; // validity in seconds (-1 means its valid as long as the system is running)
 
-    @Autowired
-    private TokenStore tokenStore;
+    private final TokenStore tokenStore;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
+
+    public AuthorizationServerConfig(TokenStore tokenStore, AuthenticationManager authenticationManager, PasswordEncoder encoder) {
+        this.tokenStore = tokenStore;
+        this.authenticationManager = authenticationManager;
+        this.encoder = encoder;
+    }
 
     // this is to configure our authentication server
 
@@ -48,7 +52,7 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints)
     {
         endpoints.tokenStore(tokenStore)
                 .authenticationManager(authenticationManager);

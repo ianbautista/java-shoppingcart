@@ -75,7 +75,7 @@ public class UserServiceImpl
     @Override
     public User findByName(String name)
     {
-        User u = userrepos.findByUsername(name.toLowerCase());
+        User u = userrepos.findAllByUsername(name.toLowerCase());
 
         if (u == null)
         {

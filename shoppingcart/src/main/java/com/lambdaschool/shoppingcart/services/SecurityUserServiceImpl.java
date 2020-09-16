@@ -20,7 +20,7 @@ public class SecurityUserServiceImpl implements UserDetailsService
     // this is where we check for username and password validation
     public UserDetails loadUserByUsername(String s) throws ResourceNotFoundException
     {
-        User user = userRepository.findByUsername(s);
+        User user = userRepository.findAllByUsername(s);
         if (user == null)
         {
             throw new ResourceNotFoundException("Invalid username or password");

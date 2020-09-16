@@ -18,14 +18,13 @@ import javax.annotation.Resource;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception
     {
-
         return super.authenticationManagerBean(); // this is authentication server
     }
 
