@@ -548,10 +548,10 @@ STATUS OK
     - [x] Only users with role Admin can access this endpoint
   - [x] DELETE http://localhost:2019/users/user/1
     - [x] Only users with role Admin can access this endpoint
-  - [ ] http://localhost:2019/carts/user
-    - [ ] Drop the path variable and return the information for authenticated user
-  - [ ] http://localhost:2019/carts/cart/1
-    - [ ] Only users with role Admin can access this endpoint
+  - [x] http://localhost:2019/carts/user
+    - [x] Drop the path variable and return the information for authenticated user
+  - [x] http://localhost:2019/carts/cart/1
+    - [x] Only users with role Admin can access this endpoint
   - [ ] POST http://localhost:2019/carts/create/product/1
     - [ ] Drop the user path variable and create a new cart for the authenticated user
   - [ ] PUT http://localhost:2019/carts/update/cart/1/product/1

@@ -31,8 +31,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
         // who has access to what. we use antMatchers(list of endpoints/routes)
         // .antMatchers("/users/users").hasAnyRole("admin")
         http.authorizeRequests()
-                .antMatchers("/", "/h2-console/**").permitAll()
+                .antMatchers("/", "/h2-console/**", "/login").permitAll()
                 .antMatchers("/users/**").authenticated()
+                .antMatchers("/products/**").authenticated()
+                .antMatchers("/carts/user").authenticated()
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());
