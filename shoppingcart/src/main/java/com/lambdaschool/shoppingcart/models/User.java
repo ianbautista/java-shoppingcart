@@ -1,6 +1,8 @@
 package com.lambdaschool.shoppingcart.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,8 +19,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User
-        extends Auditable
+public class User extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,6 +28,11 @@ public class User
     @Column(nullable = false,
             unique = true)
     private String username;
+
+    //password
+    @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
 
     private String comments;
 
@@ -44,6 +50,17 @@ public class User
     {
         // default constructor
     }
+
+    // (USERID, USERNAME, PASSWORD, COMMENTS, CREATED_BY, CREATED_DATE, LAST_MODIFIED_BY, LAST_MODIFIED_DATE)
+
+    public User(String username, String password, String comments) {
+        this.username = username;
+        setPassword(password); // password being encrypted inside the setter
+        this.comments = comments;
+    }
+
+
+    // getters and setters
 
     public long getUserid()
     {
@@ -65,6 +82,24 @@ public class User
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        // we make it encrypted
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        // we encode the password
+        this.password = passwordEncoder.encode(password);
+    }
+
+    // password setter with no encoding
+    public void setNoEncodePassword(String password)
+    {
+        this.password = password;
+    }
+
     public String getComments()
     {
         return comments;
@@ -83,5 +118,13 @@ public class User
     public void setCarts(List<Cart> carts)
     {
         this.carts = carts;
+    }
+
+    public Set<UserRoles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRoles> roles) {
+        this.roles = roles;
     }
 }
