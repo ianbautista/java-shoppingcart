@@ -2,13 +2,12 @@ package com.lambdaschool.shoppingcart.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "userroles")
-//@IdClass(UserRolesId.class)
+@IdClass(UserRolesId.class)
 public class UserRoles extends Auditable implements Serializable
 {
     // foreign key. relationship to User
@@ -23,6 +22,6 @@ public class UserRoles extends Auditable implements Serializable
     @ManyToOne
     @JoinColumn(name = "roleid")
     @JsonIgnoreProperties(value = "users", allowSetters = true)
-    private Role role;
+    private Roles role;
 
 }

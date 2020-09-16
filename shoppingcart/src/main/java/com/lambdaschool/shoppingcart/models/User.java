@@ -11,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -33,9 +35,14 @@ public class User
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private List<Cart> carts = new ArrayList<>();
 
+    // relationship to UserRoles
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private Set<UserRoles> roles = new HashSet<>();
+
     public User()
     {
-
+        // default constructor
     }
 
     public long getUserid()
