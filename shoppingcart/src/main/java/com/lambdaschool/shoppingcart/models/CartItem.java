@@ -16,12 +16,14 @@ public class CartItem
         extends Auditable
         implements Serializable
 {
+    // relationship to Cart
     @Id
     @ManyToOne
     @JoinColumn(name = "cartid")
     @JsonIgnoreProperties(value = "products")
     private Cart cart;
 
+    // relationship to Product
     @Id
     @ManyToOne
     @JoinColumn(name = "productid")

@@ -28,10 +28,9 @@ public class User
 
     private String comments;
 
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = "user",
-            allowSetters = true)
+    // relationship to Cart
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
     private List<Cart> carts = new ArrayList<>();
 
     public User()

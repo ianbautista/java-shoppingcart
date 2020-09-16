@@ -35,10 +35,9 @@ public class Product
     private String description;
     private String comments;
 
-    @OneToMany(mappedBy = "product",
-            cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = "product",
-            allowSetters = true)
+    // relationship to CartItem
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "product", allowSetters = true)
     private List<CartItem> carts = new ArrayList<>();
 
     public Product()

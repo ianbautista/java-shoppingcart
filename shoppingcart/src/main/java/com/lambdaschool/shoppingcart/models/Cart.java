@@ -23,17 +23,15 @@ public class Cart
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long cartid;
 
-    @OneToMany(mappedBy = "cart",
-            cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = "cart",
-            allowSetters = true)
+    // relationship to CartItem
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "cart", allowSetters = true)
     private List<CartItem> products = new ArrayList<>();
 
+    // relationship to User
     @ManyToOne
-    @JoinColumn(name = "userid",
-            nullable = false)
-    @JsonIgnoreProperties(value = "carts",
-            allowSetters = true)
+    @JoinColumn(name = "userid", nullable = false)
+    @JsonIgnoreProperties(value = "carts", allowSetters = true)
     private User user;
 
     public Cart()
