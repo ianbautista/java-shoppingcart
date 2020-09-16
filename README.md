@@ -537,7 +537,7 @@ STATUS OK
   - [x] In the existing User model add fields for password and roles including associated getters, setters, and other needed methods
   - [x] Add findByName to the User Service with associated repository entry
   - [x] Add the necessary helper functions
-  - [ ] Add the SecurityUserService service
+  - [x] Add the SecurityUserService service
   - [ ] Add and update the necessary configuration files
 - [ ] The initial endpoints are affected by security as follows
   - [ ] http://localhost:2019/users/users
