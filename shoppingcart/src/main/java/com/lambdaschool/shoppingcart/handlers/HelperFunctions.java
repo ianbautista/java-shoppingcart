@@ -1,5 +1,6 @@
 package com.lambdaschool.shoppingcart.handlers;
 
+import com.lambdaschool.shoppingcart.models.User;
 import com.lambdaschool.shoppingcart.models.ValidationError;
 import org.springframework.stereotype.Component;
 
@@ -49,4 +50,5 @@ public class HelperFunctions
         }
         return listVE;
     }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,5 +76,15 @@ public class UserController
     {
         userService.delete(userId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    // http://localhost:2019/users/myinfo
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping(value = "/myinfo", produces = {"application/json"})
+    public ResponseEntity<?> findCurrentUser(Authentication auth)
+    {
+        User currentUser = userService.findUserById(userService.findByName(auth.getName()).getUserid());
+        return new ResponseEntity<>(currentUser, HttpStatus.OK);
     }
 }
