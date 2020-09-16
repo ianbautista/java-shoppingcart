@@ -1,32 +1,34 @@
 package com.lambdaschool.shoppingcart.models;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class UserRolesId implements Serializable
 {
-    private long userid;
-    private long roleid;
+    private long user;
+    private long role;
 
     public UserRolesId()
     {
-        // default contructor
+        // default constructor
     }
 
     // getters and setters
-    public long getUserid() {
-        return userid;
+    public long getUser() {
+        return user;
     }
 
-    public void setUserid(long userid) {
-        this.userid = userid;
+    public void setUser(long userid) {
+        this.user = userid;
     }
 
-    public long getRoleid() {
-        return roleid;
+    public long getRole() {
+        return role;
     }
 
-    public void setRoleid(long roleid) {
-        this.roleid = roleid;
+    public void setRole(long roleid) {
+        this.role = roleid;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class UserRolesId implements Serializable
             return false;
         }
         UserRolesId that = (UserRolesId) o;
-        return userid == that.userid && roleid == that.roleid;
+        return user == that.user && role == that.role;
     }
 
     @Override

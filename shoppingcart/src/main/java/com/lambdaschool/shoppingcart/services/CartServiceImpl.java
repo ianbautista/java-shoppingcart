@@ -44,7 +44,7 @@ public class CartServiceImpl
     private UserAuditing userAuditing;
 
     @Autowired
-    HelperFunctions helper;
+    HelperFunctionsService helper;
 
     @Override
     public List<Cart> findAllByUserId(Long userid)

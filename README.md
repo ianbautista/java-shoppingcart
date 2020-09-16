@@ -554,10 +554,10 @@ STATUS OK
     - [x] Only users with role Admin can access this endpoint
   - [x] POST http://localhost:2019/carts/create/product/1
     - [x] Drop the user path variable and create a new cart for the authenticated user
-  - [ ] PUT http://localhost:2019/carts/update/cart/1/product/1
-    - [ ] Any user with role Admin can access this endpoint. Any user with role User can only access carts that they own. This would similar to the function in our usermodel under OAuth2 for updating a user using the helper.isAuthorizedToMakeChange() method. You can get the current authenticated use from the userAuditor field!
-  - [ ] DELETE http://localhost:2019/carts/delete/cart/1/product/1
-    - [ ] Any user with role Admin can access this endpoint. Any user with role User can only access carts that they own. This would similar to the function in our usermodel under OAuth2 for updating a user using the helper.isAuthorizedToMakeChange() method. You can get the current authenticated use from the userAuditor field!
+  - [x] PUT http://localhost:2019/carts/update/cart/1/product/1
+    - [x] Any user with role Admin can access this endpoint. Any user with role User can only access carts that they own. This would similar to the function in our usermodel under OAuth2 for updating a user using the helper.isAuthorizedToMakeChange() method. You can get the current authenticated use from the userAuditor field!
+  - [x] DELETE http://localhost:2019/carts/delete/cart/1/product/1
+    - [x] Any user with role Admin can access this endpoint. Any user with role User can only access carts that they own. This would similar to the function in our usermodel under OAuth2 for updating a user using the helper.isAuthorizedToMakeChange() method. You can get the current authenticated use from the userAuditor field!
   - [x] http://localhost:2019/products/products
     - [x] Only users with role Admin can access this endpoint
   - [x] http://localhost:2019/products/product/1

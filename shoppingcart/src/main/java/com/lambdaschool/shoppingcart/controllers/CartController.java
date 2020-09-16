@@ -4,7 +4,6 @@ import com.lambdaschool.shoppingcart.models.Cart;
 import com.lambdaschool.shoppingcart.models.Product;
 import com.lambdaschool.shoppingcart.models.User;
 import com.lambdaschool.shoppingcart.services.CartService;
-import com.lambdaschool.shoppingcart.services.HelperFunctions;
 import com.lambdaschool.shoppingcart.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,6 +63,7 @@ public class CartController
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(value = "/update/cart/{cartid}/product/{productid}")
     public ResponseEntity<?> updateCart(@PathVariable long cartid, @PathVariable long productid)
     {
@@ -77,6 +77,7 @@ public class CartController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/delete/cart/{cartid}/product/{productid}")
     public ResponseEntity<?> deleteFromCart(@PathVariable long cartid, @PathVariable long productid)
     {
