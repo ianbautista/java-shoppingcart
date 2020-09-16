@@ -536,7 +536,7 @@ STATUS OK
     - [x] Two roles will be used - Admin for access to all of the system and User for access to only the authenticated user's information
   - [x] In the existing User model add fields for password and roles including associated getters, setters, and other needed methods
   - [x] Add findByName to the User Service with associated repository entry
-  - [ ] Add the necessary helper functions
+  - [x] Add the necessary helper functions
   - [ ] Add the SecurityUserService service
   - [ ] Add and update the necessary configuration files
 - [ ] The initial endpoints are affected by security as follows
