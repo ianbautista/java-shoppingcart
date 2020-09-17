@@ -572,3 +572,5 @@ STATUS OK
     - [x] Any authenticated user can access this endpoint and it will return the authenticated users information
 
 For MVP, you do not need to add any more endpoints than those listed above!!!
+
+Project successfully deployed in heroku with base URL https://ianbautista-shoppingcart.herokuapp.com/
