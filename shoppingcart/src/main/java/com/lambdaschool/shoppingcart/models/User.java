@@ -1,6 +1,9 @@
 package com.lambdaschool.shoppingcart.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,12 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User
-        extends Auditable
+public class User extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,18 +30,38 @@ public class User
             unique = true)
     private String username;
 
+    //password
+    @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
     private String comments;
 
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = "user",
-            allowSetters = true)
+    // relationship to Cart
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
     private List<Cart> carts = new ArrayList<>();
+
+    // relationship to UserRoles
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private Set<UserRoles> roles = new HashSet<>();
 
     public User()
     {
-
+        // default constructor
     }
+
+    // (USERID, USERNAME, PASSWORD, COMMENTS, CREATED_BY, CREATED_DATE, LAST_MODIFIED_BY, LAST_MODIFIED_DATE)
+
+    public User(String username, String password, String comments) {
+        this.username = username;
+        setPassword(password); // password being encrypted inside the setter
+        this.comments = comments;
+    }
+
+
+    // getters and setters
 
     public long getUserid()
     {
@@ -59,6 +83,24 @@ public class User
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        // we make it encrypted
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        // we encode the password
+        this.password = passwordEncoder.encode(password);
+    }
+
+    // password setter with no encoding
+    public void setNoEncodePassword(String password)
+    {
+        this.password = password;
+    }
+
     public String getComments()
     {
         return comments;
@@ -77,5 +119,27 @@ public class User
     public void setCarts(List<Cart> carts)
     {
         this.carts = carts;
+    }
+
+    public Set<UserRoles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRoles> roles) {
+        this.roles = roles;
+    }
+
+    // SimpleGrantedAuthority is a role
+    public List<SimpleGrantedAuthority> getAuthority()
+    {
+        List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
+
+        for (UserRoles r : this.roles)
+        {
+            // when we talk about authority we put ROLE_ in-front of the role name
+            String myRole = "ROLE_" + r.getRole().getName().toUpperCase();
+            rtnList.add(new SimpleGrantedAuthority(myRole));
+        }
+        return rtnList;
     }
 }
